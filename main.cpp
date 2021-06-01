@@ -10,5 +10,6 @@ const int H = 800;
 int main()
 {
 
+    sf:Window game
     return 0;
 }

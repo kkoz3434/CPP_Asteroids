@@ -10,9 +10,14 @@ class Asteroid {
 protected:
     float x;
     float y;
-    float xd;
-    float yd;
+    float dx;
+    float dy;
     int size; // from 3 ro 1, 1 is the smallest
+
+public:
+    Asteroid(float x, float y, float dx, float dy, int size)
+    : x{x}, y{y}, dx{dx}, dy{dy}, size{size}{}
+
 
 };
 
