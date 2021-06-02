@@ -3,7 +3,8 @@ project(projekt_asteroid)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(projekt_asteroid main.cpp Asteroid.cpp Asteroid.h GameSetup.h)
+add_executable(projekt_asteroid main.cpp GameSetup.h SpaceObject.cpp SpaceObject.h GameEngine.cpp GameEngine.h
+        Asteroid.cpp Asteroid.h Player.cpp Player.h)
 
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake_modules")
 find_package(SFML REQUIRED system window graphics network audio)

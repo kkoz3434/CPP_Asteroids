@@ -169,6 +169,87 @@ Asteroid.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/projekt_asteroid.dir/build.make CMakeFiles/projekt_asteroid.dir/Asteroid.cpp.s
 .PHONY : Asteroid.cpp.s
 
+GameEngine.o: GameEngine.cpp.o
+
+.PHONY : GameEngine.o
+
+# target to build an object file
+GameEngine.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/projekt_asteroid.dir/build.make CMakeFiles/projekt_asteroid.dir/GameEngine.cpp.o
+.PHONY : GameEngine.cpp.o
+
+GameEngine.i: GameEngine.cpp.i
+
+.PHONY : GameEngine.i
+
+# target to preprocess a source file
+GameEngine.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/projekt_asteroid.dir/build.make CMakeFiles/projekt_asteroid.dir/GameEngine.cpp.i
+.PHONY : GameEngine.cpp.i
+
+GameEngine.s: GameEngine.cpp.s
+
+.PHONY : GameEngine.s
+
+# target to generate assembly for a file
+GameEngine.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/projekt_asteroid.dir/build.make CMakeFiles/projekt_asteroid.dir/GameEngine.cpp.s
+.PHONY : GameEngine.cpp.s
+
+Player.o: Player.cpp.o
+
+.PHONY : Player.o
+
+# target to build an object file
+Player.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/projekt_asteroid.dir/build.make CMakeFiles/projekt_asteroid.dir/Player.cpp.o
+.PHONY : Player.cpp.o
+
+Player.i: Player.cpp.i
+
+.PHONY : Player.i
+
+# target to preprocess a source file
+Player.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/projekt_asteroid.dir/build.make CMakeFiles/projekt_asteroid.dir/Player.cpp.i
+.PHONY : Player.cpp.i
+
+Player.s: Player.cpp.s
+
+.PHONY : Player.s
+
+# target to generate assembly for a file
+Player.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/projekt_asteroid.dir/build.make CMakeFiles/projekt_asteroid.dir/Player.cpp.s
+.PHONY : Player.cpp.s
+
+SpaceObject.o: SpaceObject.cpp.o
+
+.PHONY : SpaceObject.o
+
+# target to build an object file
+SpaceObject.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/projekt_asteroid.dir/build.make CMakeFiles/projekt_asteroid.dir/SpaceObject.cpp.o
+.PHONY : SpaceObject.cpp.o
+
+SpaceObject.i: SpaceObject.cpp.i
+
+.PHONY : SpaceObject.i
+
+# target to preprocess a source file
+SpaceObject.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/projekt_asteroid.dir/build.make CMakeFiles/projekt_asteroid.dir/SpaceObject.cpp.i
+.PHONY : SpaceObject.cpp.i
+
+SpaceObject.s: SpaceObject.cpp.s
+
+.PHONY : SpaceObject.s
+
+# target to generate assembly for a file
+SpaceObject.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/projekt_asteroid.dir/build.make CMakeFiles/projekt_asteroid.dir/SpaceObject.cpp.s
+.PHONY : SpaceObject.cpp.s
+
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -208,6 +289,15 @@ help:
 	@echo "... Asteroid.o"
 	@echo "... Asteroid.i"
 	@echo "... Asteroid.s"
+	@echo "... GameEngine.o"
+	@echo "... GameEngine.i"
+	@echo "... GameEngine.s"
+	@echo "... Player.o"
+	@echo "... Player.i"
+	@echo "... Player.s"
+	@echo "... SpaceObject.o"
+	@echo "... SpaceObject.i"
+	@echo "... SpaceObject.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

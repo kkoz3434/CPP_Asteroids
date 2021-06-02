@@ -1,5 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/projekt_asteroid.dir/Asteroid.cpp.o"
+  "CMakeFiles/projekt_asteroid.dir/GameEngine.cpp.o"
+  "CMakeFiles/projekt_asteroid.dir/Player.cpp.o"
+  "CMakeFiles/projekt_asteroid.dir/SpaceObject.cpp.o"
   "CMakeFiles/projekt_asteroid.dir/main.cpp.o"
   "projekt_asteroid"
   "projekt_asteroid.pdb"
