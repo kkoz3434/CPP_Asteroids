@@ -17,6 +17,7 @@ void SpaceObject::set_all(float new_x, float new_y, float new_radius) {
 SpaceObject::SpaceObject(float x, float y, float radius) : x(x), y(y), radius(radius) {
     shape = CircleShape(radius);
     shape.setOrigin(radius, radius);
+    is_alive = true;
 }
 
 void SpaceObject::update() {
@@ -33,11 +34,9 @@ void SpaceObject::wrap_position() {
 
 bool SpaceObject::collides(SpaceObject object) {
     float distance = ((x-object.x)*(x-object.x) + (y-object.y)*(y-object.y));
-    float radiuses = (radius + object.radius)*(radius + object.radius);
-    if(distance<radiuses)
-        return true;
-    else
-        return false;
+    float radiusesXD = (radius + object.radius)*(radius + object.radius);
+    return distance<radiusesXD;
+
 }
 
 bool SpaceObject::beyondMap() {

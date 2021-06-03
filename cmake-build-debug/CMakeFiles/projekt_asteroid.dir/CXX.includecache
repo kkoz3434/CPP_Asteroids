@@ -75,6 +75,8 @@ iostream
 -
 valarray
 -
+algorithm
+-
 GameSetup.h
 /media/kkoz34/Dysk lokalny/4 semestr/cpp laby/projekt_asteroid/GameSetup.h
 

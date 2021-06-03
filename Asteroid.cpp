@@ -7,16 +7,20 @@
 Asteroid::Asteroid(SpaceObject randObj, int lvl) {
     object.x = randObj.x;
     object.y= randObj.y;
-    object.radius = randObj.radius/2;
+    if(level==3)
+        object.radius = randObj.radius;
+    else
+        object.radius = randObj.radius/2;
 
     object.dx = -ASTEROID_SPEED_MAX + std::rand()%(2*ASTEROID_SPEED_MAX);
     object.dy = -ASTEROID_SPEED_MAX + std::rand()%(2*ASTEROID_SPEED_MAX);
     level = lvl;
+    points = ASTEROID_POINTS;
 
     object.shape = CircleShape(object.radius);
     object.shape.setOutlineThickness( 3);
     object.shape.setOutlineColor(Color(255,255,255));
-
+    object.shape.setOrigin(object.radius, object.radius);
     object.shape.setFillColor(Color(0,0,0));
 
 

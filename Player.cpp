@@ -11,7 +11,9 @@ Player::Player() {
 
 void Player::player_init(){
     object.shape = sf::CircleShape(PLAYER_RADIUS, 3);
-    object.shape.setFillColor(sf::Color(255, 255, 255));
+    object.shape.setFillColor(sf::Color(0,0,0));
+    object.shape.setOutlineThickness(3);
+    object.shape.setOutlineColor(Color(255,255,255));
     object.shape.setPosition(sf::Vector2f(object.x, object.y));
     object.shape.setOrigin(PLAYER_RADIUS, PLAYER_RADIUS);
     object.shape.setScale(1,1.2);

@@ -19,9 +19,10 @@ using namespace sf;
 class GameEngine {
 public:
     RenderWindow gameWindow;
-    std::vector<Asteroid> asteroids;
-    std::vector<SpaceObject> bullets;
+    std::list<Asteroid> asteroids;
+    std::list<SpaceObject> bullets;
     Player player;
+    int gameLevel;
 
     GameEngine();
 
@@ -31,11 +32,19 @@ public:
 
     void newBullet();
 
-    void update(SpaceObject object);
-
     void spawnAsteroid();
 
-    void bulletCollision();
+    int bulletCollision();
+
+    void spawnSmallerAsteroid(Asteroid asteroid);
+
+    void playerCollision();
+
+    void movePlayer(RenderWindow &gameWindow);
+
+    void moveBullets(RenderWindow &gameWindow);
+
+    void moveAsteroids(RenderWindow &gameWindow);
 };
 
 

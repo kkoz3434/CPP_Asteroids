@@ -11,6 +11,7 @@
 #include <list>
 #include <iostream>
 #include <valarray>
+#include <algorithm>
 #include "GameSetup.h"
 
 using namespace sf;

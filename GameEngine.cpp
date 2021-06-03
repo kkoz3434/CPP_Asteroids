@@ -12,11 +12,11 @@
 #include "Player.h"
 
 void GameEngine::game() {
-    std::srand(10980);
+    std::srand(time(NULL));
 
     RenderWindow gameWindow(sf::VideoMode(WIDTH, HEIGHT), TITLE);
     gameWindow.setVerticalSyncEnabled("controlled by application");
-    gameWindow.setFramerateLimit(5);
+    gameWindow.setFramerateLimit(1000);
     game_init();
 
     for (int i = 0; i < ASTEROIDS_N; i++) {
@@ -24,7 +24,7 @@ void GameEngine::game() {
 
     }
 
-    while (gameWindow.isOpen()) {
+    while (gameWindow.isOpen() && player.object.is_alive) {
         gameWindow.clear();
         Event event;
 
@@ -40,52 +40,64 @@ void GameEngine::game() {
         }
         //events
 
-        if (Keyboard::isKeyPressed(Keyboard::Left)) {
-            player.object.shape.rotate(-ROTATION_SPEED);
-        }
-        if (Keyboard::isKeyPressed(Keyboard::Right)) {
-            player.object.shape.rotate(ROTATION_SPEED);
-        }
-        if (Keyboard::isKeyPressed(Keyboard::Up)) {
-            player.object.dx = cos((player.object.shape.getRotation() - 90) * DEG_RAD) * PLAYER_SPEED;
-            player.object.dy = sin((player.object.shape.getRotation() - 90) * DEG_RAD) * PLAYER_SPEED;
-            player.object.x += player.object.dx;
-            player.object.y += player.object.dy;
-            player.object.wrap_position();
-        }
 
-        for (auto b = bullets.begin(); b != bullets.end();) {
-            if (b->beyondMap()) {
-                b= bullets.erase(b);
-                std::cout << "Deleting bullet" << std::endl;
-            } else {
-                b->update();
-                b->shape.setPosition(b->x, b->y);
-                gameWindow.draw(b->shape);
-                b++;
-            }
-        }
-
-        for (auto a = asteroids.begin(); a != asteroids.end(); a++) {
-            a->update();
-            a->object.shape.setPosition(a->object.x, a->object.y);
-            gameWindow.draw(a->object.shape);
-
-        }
+        movePlayer(gameWindow);
+        moveBullets(gameWindow);
+        moveAsteroids(gameWindow);
         bulletCollision();
+        playerCollision();
 
-        player.object.shape.setPosition(player.object.x, player.object.y);
-        gameWindow.draw(player.object.shape);
+
         gameWindow.display();
     }
 }
 
+void GameEngine::moveAsteroids(RenderWindow &gameWindow) {
+    for (auto &asteroid : asteroids) {
+        asteroid.update();
+        asteroid.object.shape.setPosition(asteroid.object.x, asteroid.object.y);
+        gameWindow.draw(asteroid.object.shape);
+
+    }
+}
+
+void GameEngine::moveBullets(RenderWindow &gameWindow) {
+    for (auto b = bullets.begin(); b != bullets.end();) {
+        if (b->beyondMap()) {
+            b = bullets.erase(b);
+            std::cout << "Deleting bullet" << std::endl;
+        } else {
+            b->update();
+            b->shape.setPosition(b->x, b->y);
+            gameWindow.draw(b->shape);
+            b++;
+        }
+    }
+}
+
+void GameEngine::movePlayer(RenderWindow &gameWindow) {
+
+    if (Keyboard::isKeyPressed(Keyboard::Left)) player.object.shape.rotate(-ROTATION_SPEED);
+
+    if (Keyboard::isKeyPressed(Keyboard::Right)) player.object.shape.rotate(ROTATION_SPEED);
+
+    if (Keyboard::isKeyPressed(Keyboard::Up)) {
+        player.object.dx = cos((player.object.shape.getRotation() - 90) * DEG_RAD) * PLAYER_SPEED;
+        player.object.dy = sin((player.object.shape.getRotation() - 90) * DEG_RAD) * PLAYER_SPEED;
+        player.object.x += player.object.dx;
+        player.object.y += player.object.dy;
+        player.object.wrap_position();
+    }
+    player.object.shape.setPosition(player.object.x, player.object.y);
+    gameWindow.draw(player.object.shape);
+
+}
+
+GameEngine::GameEngine() {}
 void GameEngine::game_init() {
     player = Player();
     player.player_init();
-}
-
-GameEngine::GameEngine() {
+    gameLevel = 0;
 }
 
 void GameEngine::newBullet() {
@@ -109,29 +121,45 @@ void GameEngine::spawnAsteroid() {
         y = rand() % HEIGHT;
         a = SpaceObject(x, y, ASTEROID_RADIUS);
     }
-    asteroids.push_back( Asteroid(a));
+    asteroids.push_back(Asteroid(a,3));
 }
 
-void GameEngine::bulletCollision() {
+int GameEngine::bulletCollision() {
     //std::cout<<"bullet collision function<"<<std::endl;
-    std::cout<<bullets.size() <<" "<< asteroids.size()<<std::endl;
-    for(auto bullet = bullets.begin(); bullet != bullets.end();) {
-        for(auto asteroid = asteroids.begin(); asteroid != asteroids.end();) {
-            if (!bullet->collides(asteroid->object)) {
-                std::cout<<"Chyba trafiony"<<std::endl;
+    //std::cout<<bullets.size() <<" "<< asteroids.size()<<std::endl;
+    int counter = 0;
+    for (auto bullet = bullets.begin(); bullet != bullets.end(); ++bullet) {
+        for (auto asteroid = asteroids.begin(); asteroid != asteroids.end() && bullet != bullets.end(); ++asteroid) {
+            if (bullet->collides(asteroid->object)) {
+                spawnSmallerAsteroid(*asteroid);
+                player.score += asteroid->points;
                 asteroid = asteroids.erase(asteroid);
                 bullet = bullets.erase(bullet);
-                std::cout << "Trafiony" << std::endl;
-            }
-            else{
-                bullet++;
-                asteroid++;
+                --asteroid;
+                --bullet;
+                counter++;
             }
         }
     }
+    return counter;
 }
 
+void GameEngine::spawnSmallerAsteroid(Asteroid asteroid) {
+    if (asteroid.level > 1)
+        for (int i = 0; i < NEW_ASTEROIDS; i++) {
+            Asteroid tmp = Asteroid(asteroid.object, asteroid.level - 1);
+            tmp.level = asteroid.level -1;
+            tmp.points= asteroid.points*2;
+            asteroids.push_back(tmp);
+        }
+}
 
-void GameEngine::update(SpaceObject object) {
+void GameEngine::playerCollision(){
+    for(auto a = asteroids.begin(); a!=asteroids.end(); a++){
+        if(player.object.collides(a->object)){
+            player.object.is_alive= false;
+        }
+    }
 
 }
+
