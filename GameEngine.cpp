@@ -11,58 +11,38 @@
 #include "GameEngine.h"
 #include "Player.h"
 
-void GameEngine::game() {
+int GameEngine::game(RenderWindow &window) {
     std::srand(time(NULL));
-
-
-    RenderWindow gameWindow(sf::VideoMode(WIDTH, HEIGHT), TITLE);
-    gameWindow.setVerticalSyncEnabled("controlled by application");
-    gameWindow.setFramerateLimit(1000);
     game_init();
+    window.display();
+    while (window.isOpen() && player.health > 0) {
+        window.clear();
 
-
-    while (gameWindow.isOpen() && player.object.is_alive) {
-        gameWindow.clear();
         Event event;
-
-        // pollEvent return true if event occured
-        while (gameWindow.pollEvent(event)) {
-            eventHandler(gameWindow, event);
+        while (window.pollEvent(event)) {
+            eventHandler(window, event);
         }
-        //events
 
-        spawnAsteroid();
-        movePlayer(gameWindow);
-        moveBullets(gameWindow);
-        moveAsteroids(gameWindow);
+        if (asteroids.size() < ASTEROIDS_N || player.score > gameLevel*20000)
+            spawnAsteroid();
+
+        movePlayer(window);
+        moveBullets(window);
+        moveAsteroids(window);
         bulletCollision();
         playerCollision();
-
-        scoreText.setString(std::to_string(player.score) + "\n" + (std::to_string(player.health)) +
+        scoreText.setString("LEVEL: "+ std::to_string(gameLevel)+ "\n"+std::to_string(player.score) + "\n" + (std::to_string(player.health)) +
                             "/" + std::to_string(PLAYER_HP));
-        scoreText.setScale(2, 2);
-        gameWindow.draw(scoreText);
-        gameWindow.display();
+        scoreText.setCharacterSize(36);
+        window.draw(scoreText);
+        window.display();
     }
-
-    scoreText.setPosition(WIDTH / 2, HEIGHT / 2);
-    scoreText.setString(std::to_string(player.score));
-    while (gameWindow.isOpen()) {
-        gameWindow.clear();
-        gameWindow.draw(scoreText);
-        Event event;
-        while (gameWindow.pollEvent(event)) {
-            if (event.type == Event::Closed) {
-                gameWindow.close();
-            }
-        }
-        gameWindow.display();
-    }
+    return player.score;
 }
 
-void GameEngine::eventHandler(RenderWindow &gameWindow, const Event &event) {
+void GameEngine::eventHandler(RenderWindow &renderWindow, const Event &event) {
     if (event.type == Event::Closed)
-        gameWindow.close();
+        renderWindow.close();
 
     if (event.type == Event::KeyReleased)
         if (event.key.code == Keyboard::Space) {
@@ -70,53 +50,48 @@ void GameEngine::eventHandler(RenderWindow &gameWindow, const Event &event) {
         }
 }
 
-void GameEngine::moveAsteroids(RenderWindow &gameWindow) {
+void GameEngine::moveAsteroids(RenderWindow &renderWindow) {
     for (auto &asteroid : asteroids) {
         asteroid.update();
-        asteroid.object.shape.setPosition(asteroid.object.x, asteroid.object.y);
-        gameWindow.draw(asteroid.object.shape);
+        asteroid.wrap_position();
+        renderWindow.draw(asteroid.shape);
 
     }
 }
 
-void GameEngine::moveBullets(RenderWindow &gameWindow) {
+void GameEngine::moveBullets(RenderWindow &renderWindow) {
     for (auto b = bullets.begin(); b != bullets.end();) {
         if (b->beyondMap()) {
             b = bullets.erase(b);
             std::cout << "Deleting bullet" << std::endl;
         } else {
             b->update();
-            b->shape.setPosition(b->x, b->y);
-            gameWindow.draw(b->shape);
+            renderWindow.draw(b->shape);
             b++;
         }
     }
 }
 
-void GameEngine::movePlayer(RenderWindow &gameWindow) {
+void GameEngine::movePlayer(RenderWindow &window) {
 
-    if (Keyboard::isKeyPressed(Keyboard::Left)) player.object.shape.rotate(-ROTATION_SPEED);
+    if (Keyboard::isKeyPressed(Keyboard::Left)) player.shape.rotate(-ROTATION_SPEED);
 
-    if (Keyboard::isKeyPressed(Keyboard::Right)) player.object.shape.rotate(ROTATION_SPEED);
+    if (Keyboard::isKeyPressed(Keyboard::Right)) player.shape.rotate(ROTATION_SPEED);
 
     if (Keyboard::isKeyPressed(Keyboard::Up)) {
-        player.object.dx = cos((player.object.shape.getRotation() - 90) * DEG_RAD) * PLAYER_SPEED;
-        player.object.dy = sin((player.object.shape.getRotation() - 90) * DEG_RAD) * PLAYER_SPEED;
+        player.dx = cos((player.shape.getRotation() - 90) * DEG_RAD) * PLAYER_SPEED;
+        player.dy = sin((player.shape.getRotation() - 90) * DEG_RAD) * PLAYER_SPEED;
 
     } else {
-        player.object.dx = 0.99*player.object.dx;
-        player.object.dy = 0.99*player.object.dy;
+        player.dx = 0.99f*player.dx;
+        player.dy = 0.99f*player.dy;
     }
 
-    player.object.x += player.object.dx;
-    player.object.y += player.object.dy;
-    player.object.wrap_position();
-    player.object.shape.setPosition(player.object.x, player.object.y);
-    gameWindow.draw(player.object.shape);
+    player.playerUpdate();
+    player.wrap_position();
+    window.draw(player.shape);
 
 }
-
-GameEngine::GameEngine() {}
 
 void GameEngine::game_init() {
     player = Player();
@@ -140,37 +115,33 @@ void GameEngine::newBullet() {
     result.radius = BULLET_SIZE;
     result.shape = CircleShape(BULLET_SIZE);
     result.shape.setOrigin(BULLET_SIZE, BULLET_SIZE);
-    result.x = player.object.x;
-    result.y = player.object.y;
-    result.dx = cos((player.object.shape.getRotation() - 90) * DEG_RAD) * BULLET_SPEED;
-    result.dy = sin((player.object.shape.getRotation() - 90) * DEG_RAD) * BULLET_SPEED;
+    result.x = player.x;
+    result.y = player.y;
+    result.dx = cos((player.shape.getRotation() - 90) * DEG_RAD) * BULLET_SPEED;
+    result.dy = sin((player.shape.getRotation() - 90) * DEG_RAD) * BULLET_SPEED;
     bullets.push_back(result);
 }
 
 void GameEngine::spawnAsteroid() {
-    if (asteroids.size() < ASTEROIDS_N || player.score > gameLevel*20000) {
         for (int i = 0; i < ASTEROIDS_N + gameLevel; ++i) {
             float x = rand() % WIDTH;
             float y = rand() % HEIGHT;
             SpaceObject a = SpaceObject(x, y, ASTEROID_RADIUS);
-            while (player.object.collides(a)) {
+            while (player.collides(a)) {
                 x = rand() % WIDTH;
                 y = rand() % HEIGHT;
                 a = SpaceObject(x, y, ASTEROID_RADIUS);
             }
-            asteroids.push_back(Asteroid(a, 3));
+            asteroids.push_back(Asteroid(a, ASTEROID_LVL));
         }
         gameLevel += 1;
-    }
 }
 
 int GameEngine::bulletCollision() {
-    //std::cout<<"bullet collision function<"<<std::endl;
-    //std::cout<<bullets.size() <<" "<< asteroids.size()<<std::endl;
     int counter = 0;
     for (auto bullet = bullets.begin(); bullet != bullets.end(); ++bullet) {
         for (auto asteroid = asteroids.begin(); asteroid != asteroids.end() && bullet != bullets.end(); ++asteroid) {
-            if (bullet->collides(asteroid->object)) {
+            if (bullet->collides(*asteroid)) {
                 spawnSmallerAsteroid(*asteroid);
                 player.score += asteroid->points;
                 asteroid = asteroids.erase(asteroid);
@@ -187,7 +158,7 @@ int GameEngine::bulletCollision() {
 void GameEngine::spawnSmallerAsteroid(Asteroid asteroid) {
     if (asteroid.level > 1)
         for (int i = 0; i < NEW_ASTEROIDS; i++) {
-            Asteroid tmp = Asteroid(asteroid.object, asteroid.level - 1);
+            Asteroid tmp = Asteroid(asteroid, asteroid.level - 1, asteroid.shape.getOutlineColor());
             tmp.level = asteroid.level - 1;
             tmp.points = asteroid.points * 2;
             asteroids.push_back(tmp);
@@ -196,17 +167,12 @@ void GameEngine::spawnSmallerAsteroid(Asteroid asteroid) {
 
 void GameEngine::playerCollision() {
     for (auto a = asteroids.begin(); a != asteroids.end(); a++) {
-        if (player.object.collides(a->object)) {
+        if (player.collides(*a)) {
             player.health -= 1;
-            if (player.health == 0) {
-                player.object.is_alive = false;
-            }
-            int red = 255 * (1 - (static_cast<float>(player.health) / PLAYER_HP));
-            int green = 255 * (static_cast<float>(player.health) / PLAYER_HP);
-            std::cout << "red: " << red << "green: " << green << std::endl;
-            player.object.shape.setOutlineColor(Color(red, green, 0));
+            a->shape.setOutlineColor(player.shape.getOutlineColor());
         }
     }
 
 }
+
 

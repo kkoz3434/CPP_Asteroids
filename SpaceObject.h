@@ -23,7 +23,6 @@ public:
     float dx;
     float dy;
     float radius;
-    bool is_alive;
 
 
     SpaceObject();

@@ -18,7 +18,7 @@ using namespace sf;
 
 class GameEngine {
 public:
-    RenderWindow gameWindow;
+    RenderWindow window;
     std::list<Asteroid> asteroids;
     std::list<SpaceObject> bullets;
     Player player;
@@ -26,11 +26,11 @@ public:
     Text scoreText;
     Font font;
 
-    GameEngine();
+
 
     void game_init();
 
-    void game();
+    int game(RenderWindow &window);
 
     void newBullet();
 
@@ -42,13 +42,13 @@ public:
 
     void playerCollision();
 
-    void movePlayer(RenderWindow &gameWindow);
+    void movePlayer(RenderWindow &window);
 
-    void moveBullets(RenderWindow &gameWindow);
+    void moveBullets(RenderWindow &renderWindow);
 
-    void moveAsteroids(RenderWindow &gameWindow);
+    void moveAsteroids(RenderWindow &renderWindow);
 
-    void eventHandler(RenderWindow &gameWindow, const Event &event);
+    void eventHandler(RenderWindow &renderWindow, const Event &event);
 };
 
 

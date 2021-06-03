@@ -6,8 +6,20 @@
 #define PROJEKT_ASTEROID_MENU_H
 
 
-class Menu {
+#include "GameEngine.h"
 
+class Menu{
+public:
+    std::list<Asteroid> asteroids;
+    bool inMainMenu = true;
+    bool endMenu = false;
+    Text menuText;
+    Text clickToPlay;
+    Font font;
+    void startMenu();
+    void background(RenderWindow &window);
+
+    void spawnBackground();
 };
 
 

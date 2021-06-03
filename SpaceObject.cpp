@@ -6,7 +6,7 @@
 #include "SpaceObject.h"
 
 
-SpaceObject::SpaceObject() : is_alive{true} {}
+SpaceObject::SpaceObject(){}
 
 void SpaceObject::set_all(float new_x, float new_y, float new_radius) {
     x = new_x;
@@ -17,12 +17,12 @@ void SpaceObject::set_all(float new_x, float new_y, float new_radius) {
 SpaceObject::SpaceObject(float x, float y, float radius) : x(x), y(y), radius(radius) {
     shape = CircleShape(radius);
     shape.setOrigin(radius, radius);
-    is_alive = true;
 }
 
 void SpaceObject::update() {
     x += dx;
     y += dy;
+    shape.setPosition(x,y);
 }
 
 void SpaceObject::wrap_position() {

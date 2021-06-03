@@ -7,17 +7,10 @@
 
 
 #include "SpaceObject.h"
-
-class Asteroid {
-
-
+#include <SFML/Graphics.hpp>
+class Asteroid: public SpaceObject{
 public:
-    Asteroid(SpaceObject object, int level=3);
-
-    void update();
-
-    SpaceObject object;
-
+    Asteroid(SpaceObject object, int level=ASTEROID_LVL, sf::Color color = Color(255,255,255));
 
     int level;
     int points;

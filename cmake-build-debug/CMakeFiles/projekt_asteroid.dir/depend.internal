@@ -14,8 +14,13 @@ CMakeFiles/projekt_asteroid.dir/GameEngine.cpp.o
  /media/kkoz34/Dysk lokalny/4 semestr/cpp laby/projekt_asteroid/Player.h
  /media/kkoz34/Dysk lokalny/4 semestr/cpp laby/projekt_asteroid/SpaceObject.h
 CMakeFiles/projekt_asteroid.dir/Menu.cpp.o
+ /media/kkoz34/Dysk lokalny/4 semestr/cpp laby/projekt_asteroid/Asteroid.h
+ /media/kkoz34/Dysk lokalny/4 semestr/cpp laby/projekt_asteroid/GameEngine.h
+ /media/kkoz34/Dysk lokalny/4 semestr/cpp laby/projekt_asteroid/GameSetup.h
  /media/kkoz34/Dysk lokalny/4 semestr/cpp laby/projekt_asteroid/Menu.cpp
  /media/kkoz34/Dysk lokalny/4 semestr/cpp laby/projekt_asteroid/Menu.h
+ /media/kkoz34/Dysk lokalny/4 semestr/cpp laby/projekt_asteroid/Player.h
+ /media/kkoz34/Dysk lokalny/4 semestr/cpp laby/projekt_asteroid/SpaceObject.h
 CMakeFiles/projekt_asteroid.dir/Player.cpp.o
  /media/kkoz34/Dysk lokalny/4 semestr/cpp laby/projekt_asteroid/GameSetup.h
  /media/kkoz34/Dysk lokalny/4 semestr/cpp laby/projekt_asteroid/Player.cpp
@@ -29,6 +34,7 @@ CMakeFiles/projekt_asteroid.dir/main.cpp.o
  /media/kkoz34/Dysk lokalny/4 semestr/cpp laby/projekt_asteroid/Asteroid.h
  /media/kkoz34/Dysk lokalny/4 semestr/cpp laby/projekt_asteroid/GameEngine.h
  /media/kkoz34/Dysk lokalny/4 semestr/cpp laby/projekt_asteroid/GameSetup.h
+ /media/kkoz34/Dysk lokalny/4 semestr/cpp laby/projekt_asteroid/Menu.h
  /media/kkoz34/Dysk lokalny/4 semestr/cpp laby/projekt_asteroid/Player.h
  /media/kkoz34/Dysk lokalny/4 semestr/cpp laby/projekt_asteroid/SpaceObject.h
  /media/kkoz34/Dysk lokalny/4 semestr/cpp laby/projekt_asteroid/main.cpp

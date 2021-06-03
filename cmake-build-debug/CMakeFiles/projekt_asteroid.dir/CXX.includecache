@@ -9,24 +9,8 @@
 /media/kkoz34/Dysk lokalny/4 semestr/cpp laby/projekt_asteroid/Asteroid.h
 SpaceObject.h
 /media/kkoz34/Dysk lokalny/4 semestr/cpp laby/projekt_asteroid/SpaceObject.h
-
-/media/kkoz34/Dysk lokalny/4 semestr/cpp laby/projekt_asteroid/GameEngine.cpp
 SFML/Graphics.hpp
 -
-time.h
--
-list
--
-iostream
--
-valarray
--
-GameSetup.h
-/media/kkoz34/Dysk lokalny/4 semestr/cpp laby/projekt_asteroid/GameSetup.h
-GameEngine.h
-/media/kkoz34/Dysk lokalny/4 semestr/cpp laby/projekt_asteroid/GameEngine.h
-Player.h
-/media/kkoz34/Dysk lokalny/4 semestr/cpp laby/projekt_asteroid/Player.h
 
 /media/kkoz34/Dysk lokalny/4 semestr/cpp laby/projekt_asteroid/GameEngine.h
 SFML/Graphics.hpp
@@ -47,6 +31,14 @@ Player.h
 /media/kkoz34/Dysk lokalny/4 semestr/cpp laby/projekt_asteroid/Player.h
 
 /media/kkoz34/Dysk lokalny/4 semestr/cpp laby/projekt_asteroid/GameSetup.h
+
+/media/kkoz34/Dysk lokalny/4 semestr/cpp laby/projekt_asteroid/Menu.cpp
+Menu.h
+/media/kkoz34/Dysk lokalny/4 semestr/cpp laby/projekt_asteroid/Menu.h
+
+/media/kkoz34/Dysk lokalny/4 semestr/cpp laby/projekt_asteroid/Menu.h
+GameEngine.h
+/media/kkoz34/Dysk lokalny/4 semestr/cpp laby/projekt_asteroid/GameEngine.h
 
 /media/kkoz34/Dysk lokalny/4 semestr/cpp laby/projekt_asteroid/Player.h
 SFML/Graphics.hpp
@@ -79,4 +71,24 @@ algorithm
 -
 GameSetup.h
 /media/kkoz34/Dysk lokalny/4 semestr/cpp laby/projekt_asteroid/GameSetup.h
+
+/media/kkoz34/Dysk lokalny/4 semestr/cpp laby/projekt_asteroid/main.cpp
+SFML/Graphics.hpp
+-
+time.h
+-
+list
+-
+iostream
+-
+valarray
+-
+GameSetup.h
+/media/kkoz34/Dysk lokalny/4 semestr/cpp laby/projekt_asteroid/GameSetup.h
+SpaceObject.h
+/media/kkoz34/Dysk lokalny/4 semestr/cpp laby/projekt_asteroid/SpaceObject.h
+GameEngine.h
+/media/kkoz34/Dysk lokalny/4 semestr/cpp laby/projekt_asteroid/GameEngine.h
+Menu.h
+/media/kkoz34/Dysk lokalny/4 semestr/cpp laby/projekt_asteroid/Menu.h
 

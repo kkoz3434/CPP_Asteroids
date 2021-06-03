@@ -13,19 +13,13 @@
 #include "GameSetup.h"
 #include "SpaceObject.h"
 
-class Player {
-
-
+class Player: public SpaceObject {
 public:
     int score;
     int health;
-    SpaceObject object;
 
     Player();
     void player_init();
-
-
+    void playerUpdate();
 };
-
-
 #endif //PROJEKT_ASTEROID_PLAYER_H

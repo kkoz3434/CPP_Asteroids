@@ -7,20 +7,22 @@
 
 #define WIDTH 1500
 #define HEIGHT 1000
-#define PLAYER_SPEED 5
+#define PLAYER_SPEED 6
 #define BULLET_SPEED 10
 #define ASTEROID_SPEED_MAX 3
 #define PLAYER_RADIUS 20.0f
 #define PLAYER_X 500
 #define PLAYER_Y 400
-#define ROTATION_SPEED 3.0f
+#define ROTATION_SPEED 5.0f
 #define DEG_RAD M_PI/180
 #define BULLET_SIZE 3
-#define ASTEROIDS_N 5
+#define ASTEROIDS_N 3
 #define ASTEROID_RADIUS 100
 #define ASTEROID_POINTS 100
-#define NEW_ASTEROIDS 5
+#define ASTEROID_LVL 4
+#define NEW_ASTEROIDS 3
 #define PLAYER_HP 100
+#define MENU_ASTEROIDS 10
 #define TITLE "Asteroids_kkoz3434"
 
 
