@@ -38,21 +38,21 @@ void GameEngine::game() {
         bulletCollision();
         playerCollision();
 
-        scoreText.setString(std::to_string(player.score) +"\n"+ (std::to_string(player.health))+
-                            "/"+std::to_string(PLAYER_HP));
-        scoreText.setScale(2,2);
+        scoreText.setString(std::to_string(player.score) + "\n" + (std::to_string(player.health)) +
+                            "/" + std::to_string(PLAYER_HP));
+        scoreText.setScale(2, 2);
         gameWindow.draw(scoreText);
         gameWindow.display();
     }
 
-    scoreText.setPosition(WIDTH/2, HEIGHT/2);
+    scoreText.setPosition(WIDTH / 2, HEIGHT / 2);
     scoreText.setString(std::to_string(player.score));
-    while(gameWindow.isOpen()){
+    while (gameWindow.isOpen()) {
         gameWindow.clear();
         gameWindow.draw(scoreText);
         Event event;
         while (gameWindow.pollEvent(event)) {
-            if(event.type == Event::Closed){
+            if (event.type == Event::Closed) {
                 gameWindow.close();
             }
         }
@@ -102,10 +102,15 @@ void GameEngine::movePlayer(RenderWindow &gameWindow) {
     if (Keyboard::isKeyPressed(Keyboard::Up)) {
         player.object.dx = cos((player.object.shape.getRotation() - 90) * DEG_RAD) * PLAYER_SPEED;
         player.object.dy = sin((player.object.shape.getRotation() - 90) * DEG_RAD) * PLAYER_SPEED;
-        player.object.x += player.object.dx;
-        player.object.y += player.object.dy;
-        player.object.wrap_position();
+
+    } else {
+        player.object.dx = 0.99*player.object.dx;
+        player.object.dy = 0.99*player.object.dy;
     }
+
+    player.object.x += player.object.dx;
+    player.object.y += player.object.dy;
+    player.object.wrap_position();
     player.object.shape.setPosition(player.object.x, player.object.y);
     gameWindow.draw(player.object.shape);
 
@@ -118,14 +123,14 @@ void GameEngine::game_init() {
     player.player_init();
     gameLevel = 0;
 
-    if(!font.loadFromFile("../Resources/AmaticSC-Regular.ttf")){
+    if (!font.loadFromFile("../Resources/AmaticSC-Regular.ttf")) {
         printf("Error while loading font!\n");
         exit(1);
     }
     scoreText.setFont(font);
     String score;
-    scoreText.setString(std::to_string(player.score) +"\n"+ (std::to_string(player.health))+
-                        "/"+std::to_string(PLAYER_HP));
+    scoreText.setString(std::to_string(player.score) + "\n" + (std::to_string(player.health)) +
+                        "/" + std::to_string(PLAYER_HP));
 
 
 }
@@ -143,7 +148,7 @@ void GameEngine::newBullet() {
 }
 
 void GameEngine::spawnAsteroid() {
-    if(asteroids.size()<ASTEROIDS_N ) {
+    if (asteroids.size() < ASTEROIDS_N || player.score > gameLevel*20000) {
         for (int i = 0; i < ASTEROIDS_N + gameLevel; ++i) {
             float x = rand() % WIDTH;
             float y = rand() % HEIGHT;
@@ -155,7 +160,7 @@ void GameEngine::spawnAsteroid() {
             }
             asteroids.push_back(Asteroid(a, 3));
         }
-        gameLevel+=1;
+        gameLevel += 1;
     }
 }
 
@@ -183,23 +188,23 @@ void GameEngine::spawnSmallerAsteroid(Asteroid asteroid) {
     if (asteroid.level > 1)
         for (int i = 0; i < NEW_ASTEROIDS; i++) {
             Asteroid tmp = Asteroid(asteroid.object, asteroid.level - 1);
-            tmp.level = asteroid.level -1;
-            tmp.points= asteroid.points*2;
+            tmp.level = asteroid.level - 1;
+            tmp.points = asteroid.points * 2;
             asteroids.push_back(tmp);
         }
 }
 
-void GameEngine::playerCollision(){
-    for(auto a = asteroids.begin(); a!=asteroids.end(); a++){
-        if(player.object.collides(a->object)){
+void GameEngine::playerCollision() {
+    for (auto a = asteroids.begin(); a != asteroids.end(); a++) {
+        if (player.object.collides(a->object)) {
             player.health -= 1;
-            if(player.health<0){
+            if (player.health == 0) {
                 player.object.is_alive = false;
             }
-            int red =  255*(1-(static_cast<float>(player.health)/PLAYER_HP));
-            int green = 255* (static_cast<float>(player.health)/PLAYER_HP);
-            std::cout<<"red: "<<red<<"green: "<<green<<std::endl;
-            player.object.shape.setOutlineColor(Color(red,green,0));
+            int red = 255 * (1 - (static_cast<float>(player.health) / PLAYER_HP));
+            int green = 255 * (static_cast<float>(player.health) / PLAYER_HP);
+            std::cout << "red: " << red << "green: " << green << std::endl;
+            player.object.shape.setOutlineColor(Color(red, green, 0));
         }
     }
 
