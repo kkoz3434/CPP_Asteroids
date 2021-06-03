@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.19)
 project(projekt_asteroid)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 
 add_executable(projekt_asteroid main.cpp GameSetup.h SpaceObject.cpp SpaceObject.h GameEngine.cpp GameEngine.h
         Asteroid.cpp Asteroid.h Player.cpp Player.h Menu.cpp Menu.h)
