@@ -14,9 +14,15 @@
 #include "SpaceObject.h"
 
 class Player {
+
+
+public:
     int score;
     SpaceObject object;
+
     Player();
+    void player_init();
+
 
 };
 

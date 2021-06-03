@@ -6,10 +6,47 @@
 #include "SpaceObject.h"
 
 
-//SpaceObject::SpaceObject(): is_alive{true}{}
+SpaceObject::SpaceObject() : is_alive{true} {}
 
-void SpaceObject::set_all(float new_x, float new_y, float new_radius){
+void SpaceObject::set_all(float new_x, float new_y, float new_radius) {
     x = new_x;
     y = new_y;
     radius = new_radius;
 }
+
+SpaceObject::SpaceObject(float x, float y, float radius) : x(x), y(y), radius(radius) {
+    shape = CircleShape(radius);
+    shape.setOrigin(radius, radius);
+}
+
+void SpaceObject::update() {
+    x += dx;
+    y += dy;
+}
+
+void SpaceObject::wrap_position() {
+    if(x<0) x = WIDTH;
+    if(x>WIDTH) x = 0;
+    if(y<0) y=HEIGHT;
+    if(y > HEIGHT) y = 0;
+}
+
+bool SpaceObject::collides(SpaceObject object) {
+    float distance = ((x-object.x)*(x-object.x) + (y-object.y)*(y-object.y));
+    float radiuses = (radius + object.radius)*(radius + object.radius);
+    if(distance<radiuses)
+        return true;
+    else
+        return false;
+}
+
+bool SpaceObject::beyondMap() {
+    if(x>WIDTH || y>HEIGHT || x<0 || y<0)
+        return true;
+    return false;
+}
+
+
+
+
+

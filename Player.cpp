@@ -4,4 +4,18 @@
 
 #include "Player.h"
 
+Player::Player() {
+    object = SpaceObject(PLAYER_X, PLAYER_Y, PLAYER_RADIUS);
+    score = 0;
+}
+
+void Player::player_init(){
+    object.shape = sf::CircleShape(PLAYER_RADIUS, 3);
+    object.shape.setFillColor(sf::Color(255, 255, 255));
+    object.shape.setPosition(sf::Vector2f(object.x, object.y));
+    object.shape.setOrigin(PLAYER_RADIUS, PLAYER_RADIUS);
+    object.shape.setScale(1,1.2);
+}
+
+
 

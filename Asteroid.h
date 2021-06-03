@@ -11,8 +11,13 @@
 class Asteroid {
     int level;
     int points;
-    SpaceObject object;
 
+
+public:
+    Asteroid(SpaceObject object, int level=3);
+    void update();
+
+    SpaceObject object;
 };
 
 
