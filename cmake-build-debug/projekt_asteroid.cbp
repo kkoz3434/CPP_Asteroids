@@ -97,6 +97,12 @@
 		<Unit filename="/media/kkoz34/Dysk lokalny/4 semestr/cpp laby/projekt_asteroid/GameSetup.h">
 			<Option target="projekt_asteroid"/>
 		</Unit>
+		<Unit filename="/media/kkoz34/Dysk lokalny/4 semestr/cpp laby/projekt_asteroid/Menu.cpp">
+			<Option target="projekt_asteroid"/>
+		</Unit>
+		<Unit filename="/media/kkoz34/Dysk lokalny/4 semestr/cpp laby/projekt_asteroid/Menu.h">
+			<Option target="projekt_asteroid"/>
+		</Unit>
 		<Unit filename="/media/kkoz34/Dysk lokalny/4 semestr/cpp laby/projekt_asteroid/Player.cpp">
 			<Option target="projekt_asteroid"/>
 		</Unit>

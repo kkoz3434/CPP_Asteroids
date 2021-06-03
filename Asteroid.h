@@ -18,7 +18,6 @@ public:
 
     SpaceObject object;
 
-    Asteroid smallAsteroid(Asteroid asteroid);
 
     int level;
     int points;

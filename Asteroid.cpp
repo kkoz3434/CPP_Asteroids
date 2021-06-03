@@ -7,6 +7,7 @@
 Asteroid::Asteroid(SpaceObject randObj, int lvl) {
     object.x = randObj.x;
     object.y= randObj.y;
+    level = lvl;
     if(level==3)
         object.radius = randObj.radius;
     else
@@ -14,7 +15,7 @@ Asteroid::Asteroid(SpaceObject randObj, int lvl) {
 
     object.dx = -ASTEROID_SPEED_MAX + std::rand()%(2*ASTEROID_SPEED_MAX);
     object.dy = -ASTEROID_SPEED_MAX + std::rand()%(2*ASTEROID_SPEED_MAX);
-    level = lvl;
+
     points = ASTEROID_POINTS;
 
     object.shape = CircleShape(object.radius);

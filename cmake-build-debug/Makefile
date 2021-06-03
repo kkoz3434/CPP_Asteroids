@@ -196,6 +196,33 @@ GameEngine.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/projekt_asteroid.dir/build.make CMakeFiles/projekt_asteroid.dir/GameEngine.cpp.s
 .PHONY : GameEngine.cpp.s
 
+Menu.o: Menu.cpp.o
+
+.PHONY : Menu.o
+
+# target to build an object file
+Menu.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/projekt_asteroid.dir/build.make CMakeFiles/projekt_asteroid.dir/Menu.cpp.o
+.PHONY : Menu.cpp.o
+
+Menu.i: Menu.cpp.i
+
+.PHONY : Menu.i
+
+# target to preprocess a source file
+Menu.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/projekt_asteroid.dir/build.make CMakeFiles/projekt_asteroid.dir/Menu.cpp.i
+.PHONY : Menu.cpp.i
+
+Menu.s: Menu.cpp.s
+
+.PHONY : Menu.s
+
+# target to generate assembly for a file
+Menu.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/projekt_asteroid.dir/build.make CMakeFiles/projekt_asteroid.dir/Menu.cpp.s
+.PHONY : Menu.cpp.s
+
 Player.o: Player.cpp.o
 
 .PHONY : Player.o
@@ -292,6 +319,9 @@ help:
 	@echo "... GameEngine.o"
 	@echo "... GameEngine.i"
 	@echo "... GameEngine.s"
+	@echo "... Menu.o"
+	@echo "... Menu.i"
+	@echo "... Menu.s"
 	@echo "... Player.o"
 	@echo "... Player.i"
 	@echo "... Player.s"

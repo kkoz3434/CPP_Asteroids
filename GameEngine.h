@@ -45,6 +45,8 @@ public:
     void moveBullets(RenderWindow &gameWindow);
 
     void moveAsteroids(RenderWindow &gameWindow);
+
+    void enentHandler(RenderWindow &gameWindow, const Event &event);
 };
 
 

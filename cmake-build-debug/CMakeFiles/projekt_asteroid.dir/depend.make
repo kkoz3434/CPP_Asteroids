@@ -13,6 +13,9 @@ CMakeFiles/projekt_asteroid.dir/GameEngine.cpp.o: ../GameSetup.h
 CMakeFiles/projekt_asteroid.dir/GameEngine.cpp.o: ../Player.h
 CMakeFiles/projekt_asteroid.dir/GameEngine.cpp.o: ../SpaceObject.h
 
+CMakeFiles/projekt_asteroid.dir/Menu.cpp.o: ../Menu.cpp
+CMakeFiles/projekt_asteroid.dir/Menu.cpp.o: ../Menu.h
+
 CMakeFiles/projekt_asteroid.dir/Player.cpp.o: ../GameSetup.h
 CMakeFiles/projekt_asteroid.dir/Player.cpp.o: ../Player.cpp
 CMakeFiles/projekt_asteroid.dir/Player.cpp.o: ../Player.h

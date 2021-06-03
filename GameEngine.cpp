@@ -14,15 +14,21 @@
 void GameEngine::game() {
     std::srand(time(NULL));
 
+
     RenderWindow gameWindow(sf::VideoMode(WIDTH, HEIGHT), TITLE);
     gameWindow.setVerticalSyncEnabled("controlled by application");
     gameWindow.setFramerateLimit(1000);
     game_init();
 
-    for (int i = 0; i < ASTEROIDS_N; i++) {
-        spawnAsteroid();
-
+    Font font;
+    if(!font.loadFromFile("../Resources/AmaticSC-Regular.ttf")){
+        printf("Error while loading font!\n");
+        exit(1);
     }
+    Text scoreText;
+    scoreText.setFont(font);
+    String score;
+    scoreText.setString(std::to_string(player.score));
 
     while (gameWindow.isOpen() && player.object.is_alive) {
         gameWindow.clear();
@@ -30,26 +36,32 @@ void GameEngine::game() {
 
         // pollEvent return true if event occured
         while (gameWindow.pollEvent(event)) {
-            if (event.type == Event::Closed)
-                gameWindow.close();
-
-            if (event.type == Event::KeyReleased)
-                if (event.key.code == Keyboard::Space) {
-                    newBullet();
-                }
+            enentHandler(gameWindow, event);
         }
         //events
 
-
+        spawnAsteroid();
         movePlayer(gameWindow);
         moveBullets(gameWindow);
         moveAsteroids(gameWindow);
         bulletCollision();
-        playerCollision();
+        //playerCollision();
 
-
+        scoreText.setString(std::to_string(player.score));
+        scoreText.setScale(2,2);
+        gameWindow.draw(scoreText);
         gameWindow.display();
     }
+}
+
+void GameEngine::enentHandler(RenderWindow &gameWindow, const Event &event) {
+    if (event.type == Event::Closed)
+        gameWindow.close();
+
+    if (event.type == Event::TextEntered)
+        if (event.key.code == ' ') {
+            newBullet();
+        }
 }
 
 void GameEngine::moveAsteroids(RenderWindow &gameWindow) {
@@ -94,6 +106,7 @@ void GameEngine::movePlayer(RenderWindow &gameWindow) {
 }
 
 GameEngine::GameEngine() {}
+
 void GameEngine::game_init() {
     player = Player();
     player.player_init();
@@ -113,15 +126,20 @@ void GameEngine::newBullet() {
 }
 
 void GameEngine::spawnAsteroid() {
-    float x = rand() % WIDTH;
-    float y = rand() % HEIGHT;
-    SpaceObject a = SpaceObject(x, y, ASTEROID_RADIUS);
-    while (player.object.collides(a)) {
-        x = rand() % WIDTH;
-        y = rand() % HEIGHT;
-        a = SpaceObject(x, y, ASTEROID_RADIUS);
+    if(asteroids.size()==0) {
+        for (int i = 0; i < ASTEROIDS_N + gameLevel; ++i) {
+            float x = rand() % WIDTH;
+            float y = rand() % HEIGHT;
+            SpaceObject a = SpaceObject(x, y, ASTEROID_RADIUS);
+            while (player.object.collides(a)) {
+                x = rand() % WIDTH;
+                y = rand() % HEIGHT;
+                a = SpaceObject(x, y, ASTEROID_RADIUS);
+            }
+            asteroids.push_back(Asteroid(a, 3));
+        }
+        gameLevel+=1;
     }
-    asteroids.push_back(Asteroid(a,3));
 }
 
 int GameEngine::bulletCollision() {
