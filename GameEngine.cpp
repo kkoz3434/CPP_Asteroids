@@ -14,7 +14,7 @@
 int GameEngine::game(RenderWindow &window) {
     std::srand(time(NULL));
     game_init();
-    window.display();
+    spawnAsteroid();
     while (window.isOpen() && player.health > 0) {
         window.clear();
 
@@ -23,8 +23,11 @@ int GameEngine::game(RenderWindow &window) {
             eventHandler(window, event);
         }
 
-        if (asteroids.size() < ASTEROIDS_N || player.score > gameLevel*20000)
+        if (asteroids.size() < ASTEROIDS_N || player.score > gameLevel*20000) {
             spawnAsteroid();
+            player.health+=20;
+        }
+
 
         movePlayer(window);
         moveBullets(window);
@@ -32,7 +35,7 @@ int GameEngine::game(RenderWindow &window) {
         bulletCollision();
         playerCollision();
         scoreText.setString("LEVEL: "+ std::to_string(gameLevel)+ "\n"+std::to_string(player.score) + "\n" + (std::to_string(player.health)) +
-                            "/" + std::to_string(PLAYER_HP));
+                            "/" + std::to_string(PLAYER_HP) + "\n X Bombs: " + std::to_string(xBombs));
         scoreText.setCharacterSize(36);
         window.draw(scoreText);
         window.display();
@@ -44,10 +47,18 @@ void GameEngine::eventHandler(RenderWindow &renderWindow, const Event &event) {
     if (event.type == Event::Closed)
         renderWindow.close();
 
-    if (event.type == Event::KeyReleased)
+    if (event.type == Event::KeyReleased) {
         if (event.key.code == Keyboard::Space) {
             newBullet();
         }
+        if(event.key.code == Keyboard::X){
+           if(xBombs>0){
+               xBombs -=1;
+               newXBomb();
+           }
+        }
+    }
+
 }
 
 void GameEngine::moveAsteroids(RenderWindow &renderWindow) {
@@ -171,6 +182,21 @@ void GameEngine::playerCollision() {
             player.health -= 1;
             a->shape.setOutlineColor(player.shape.getOutlineColor());
         }
+    }
+
+}
+
+void GameEngine::newXBomb() {
+    for(int i= 0; i<365; i+=XBOMB_RANGE){
+        SpaceObject result;
+        result.radius = BULLET_SIZE;
+        result.shape = CircleShape(BULLET_SIZE);
+        result.shape.setOrigin(BULLET_SIZE, BULLET_SIZE);
+        result.x = player.x;
+        result.y = player.y;
+        result.dx = cos((i) * DEG_RAD) * BULLET_SPEED;
+        result.dy = sin((i) * DEG_RAD) * BULLET_SPEED;
+        bullets.push_back(result);
     }
 
 }

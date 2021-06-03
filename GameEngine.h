@@ -25,6 +25,7 @@ public:
     int gameLevel;
     Text scoreText;
     Font font;
+    int xBombs = XBOMBS;
 
 
 
@@ -49,6 +50,8 @@ public:
     void moveAsteroids(RenderWindow &renderWindow);
 
     void eventHandler(RenderWindow &renderWindow, const Event &event);
+
+    void newXBomb();
 };
 
 

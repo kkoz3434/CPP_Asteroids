@@ -14,12 +14,26 @@ public:
     bool inMainMenu = true;
     bool endMenu = false;
     Text menuText;
-    Text clickToPlay;
+    Text clickToPlayText;
+    Text scoreText;
+    Text endText;
+    Text pressEscapeText;
+    Text authorText;
     Font font;
+
+    int score = 0;
     void startMenu();
     void background(RenderWindow &window);
 
     void spawnBackground();
+
+    void textInit();
+
+    void startGame(RenderWindow &window, int &score);
+
+    void endScreen(RenderWindow &window);
+
+    void textEnd();
 };
 
 

@@ -23,9 +23,14 @@ void Player::player_init(){
 }
 
 void Player::playerUpdate() {
-    int red = 255 * (1 - (static_cast<float>(health) / PLAYER_HP));
-    int green = 255 * (static_cast<float>(health) / PLAYER_HP);
-    shape.setOutlineColor(Color(red, green, 0));
+    if(health> 100){
+        shape.setOutlineColor(Color(255,215,0));
+    }
+    else {
+        int red = 255 * (1 - (static_cast<float>(health) / PLAYER_HP));
+        int green = 255 * (static_cast<float>(health) / PLAYER_HP);
+        shape.setOutlineColor(Color(red, green, 0));
+    }
     SpaceObject::update();
 }
 

@@ -5,8 +5,8 @@
 #ifndef PROJEKT_ASTEROID_GAMESETUP_H
 #define PROJEKT_ASTEROID_GAMESETUP_H
 
-#define WIDTH 1500
-#define HEIGHT 1000
+#define WIDTH 1800
+#define HEIGHT 900
 #define PLAYER_SPEED 6
 #define BULLET_SPEED 10
 #define ASTEROID_SPEED_MAX 3
@@ -23,6 +23,8 @@
 #define NEW_ASTEROIDS 3
 #define PLAYER_HP 100
 #define MENU_ASTEROIDS 10
+#define XBOMBS 5
+#define XBOMB_RANGE 10
 #define TITLE "Asteroids_kkoz3434"
 
 
