@@ -20,6 +20,7 @@
 #define ASTEROID_RADIUS 100
 #define ASTEROID_POINTS 100
 #define NEW_ASTEROIDS 5
+#define PLAYER_HP 100
 #define TITLE "Asteroids_kkoz3434"
 
 

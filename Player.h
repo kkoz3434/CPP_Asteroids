@@ -18,6 +18,7 @@ class Player {
 
 public:
     int score;
+    int health;
     SpaceObject object;
 
     Player();

@@ -20,15 +20,6 @@ void GameEngine::game() {
     gameWindow.setFramerateLimit(1000);
     game_init();
 
-    Font font;
-    if(!font.loadFromFile("../Resources/AmaticSC-Regular.ttf")){
-        printf("Error while loading font!\n");
-        exit(1);
-    }
-    Text scoreText;
-    scoreText.setFont(font);
-    String score;
-    scoreText.setString(std::to_string(player.score));
 
     while (gameWindow.isOpen() && player.object.is_alive) {
         gameWindow.clear();
@@ -36,7 +27,7 @@ void GameEngine::game() {
 
         // pollEvent return true if event occured
         while (gameWindow.pollEvent(event)) {
-            enentHandler(gameWindow, event);
+            eventHandler(gameWindow, event);
         }
         //events
 
@@ -45,21 +36,36 @@ void GameEngine::game() {
         moveBullets(gameWindow);
         moveAsteroids(gameWindow);
         bulletCollision();
-        //playerCollision();
+        playerCollision();
 
-        scoreText.setString(std::to_string(player.score));
+        scoreText.setString(std::to_string(player.score) +"\n"+ (std::to_string(player.health))+
+                            "/"+std::to_string(PLAYER_HP));
         scoreText.setScale(2,2);
         gameWindow.draw(scoreText);
         gameWindow.display();
     }
+
+    scoreText.setPosition(WIDTH/2, HEIGHT/2);
+    scoreText.setString(std::to_string(player.score));
+    while(gameWindow.isOpen()){
+        gameWindow.clear();
+        gameWindow.draw(scoreText);
+        Event event;
+        while (gameWindow.pollEvent(event)) {
+            if(event.type == Event::Closed){
+                gameWindow.close();
+            }
+        }
+        gameWindow.display();
+    }
 }
 
-void GameEngine::enentHandler(RenderWindow &gameWindow, const Event &event) {
+void GameEngine::eventHandler(RenderWindow &gameWindow, const Event &event) {
     if (event.type == Event::Closed)
         gameWindow.close();
 
-    if (event.type == Event::TextEntered)
-        if (event.key.code == ' ') {
+    if (event.type == Event::KeyReleased)
+        if (event.key.code == Keyboard::Space) {
             newBullet();
         }
 }
@@ -111,6 +117,17 @@ void GameEngine::game_init() {
     player = Player();
     player.player_init();
     gameLevel = 0;
+
+    if(!font.loadFromFile("../Resources/AmaticSC-Regular.ttf")){
+        printf("Error while loading font!\n");
+        exit(1);
+    }
+    scoreText.setFont(font);
+    String score;
+    scoreText.setString(std::to_string(player.score) +"\n"+ (std::to_string(player.health))+
+                        "/"+std::to_string(PLAYER_HP));
+
+
 }
 
 void GameEngine::newBullet() {
@@ -126,7 +143,7 @@ void GameEngine::newBullet() {
 }
 
 void GameEngine::spawnAsteroid() {
-    if(asteroids.size()==0) {
+    if(asteroids.size()<ASTEROIDS_N ) {
         for (int i = 0; i < ASTEROIDS_N + gameLevel; ++i) {
             float x = rand() % WIDTH;
             float y = rand() % HEIGHT;
@@ -175,7 +192,14 @@ void GameEngine::spawnSmallerAsteroid(Asteroid asteroid) {
 void GameEngine::playerCollision(){
     for(auto a = asteroids.begin(); a!=asteroids.end(); a++){
         if(player.object.collides(a->object)){
-            player.object.is_alive= false;
+            player.health -= 1;
+            if(player.health<0){
+                player.object.is_alive = false;
+            }
+            int red =  255*(1-(static_cast<float>(player.health)/PLAYER_HP));
+            int green = 255* (static_cast<float>(player.health)/PLAYER_HP);
+            std::cout<<"red: "<<red<<"green: "<<green<<std::endl;
+            player.object.shape.setOutlineColor(Color(red,green,0));
         }
     }
 

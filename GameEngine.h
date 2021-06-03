@@ -23,6 +23,8 @@ public:
     std::list<SpaceObject> bullets;
     Player player;
     int gameLevel;
+    Text scoreText;
+    Font font;
 
     GameEngine();
 
@@ -46,7 +48,7 @@ public:
 
     void moveAsteroids(RenderWindow &gameWindow);
 
-    void enentHandler(RenderWindow &gameWindow, const Event &event);
+    void eventHandler(RenderWindow &gameWindow, const Event &event);
 };
 
 
