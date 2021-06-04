@@ -130,6 +130,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named GameEngine
+
+# Build rule for target.
+GameEngine: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 GameEngine
+.PHONY : GameEngine
+
+# fast build rule for target.
+GameEngine/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/GameEngine.dir/build.make CMakeFiles/GameEngine.dir/build
+.PHONY : GameEngine/fast
+
+#=============================================================================
 # Target rules for targets named projekt_asteroid
 
 # Build rule for target.
@@ -175,6 +188,7 @@ GameEngine.o: GameEngine.cpp.o
 
 # target to build an object file
 GameEngine.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/GameEngine.dir/build.make CMakeFiles/GameEngine.dir/GameEngine.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/projekt_asteroid.dir/build.make CMakeFiles/projekt_asteroid.dir/GameEngine.cpp.o
 .PHONY : GameEngine.cpp.o
 
@@ -184,6 +198,7 @@ GameEngine.i: GameEngine.cpp.i
 
 # target to preprocess a source file
 GameEngine.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/GameEngine.dir/build.make CMakeFiles/GameEngine.dir/GameEngine.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/projekt_asteroid.dir/build.make CMakeFiles/projekt_asteroid.dir/GameEngine.cpp.i
 .PHONY : GameEngine.cpp.i
 
@@ -193,6 +208,7 @@ GameEngine.s: GameEngine.cpp.s
 
 # target to generate assembly for a file
 GameEngine.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/GameEngine.dir/build.make CMakeFiles/GameEngine.dir/GameEngine.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/projekt_asteroid.dir/build.make CMakeFiles/projekt_asteroid.dir/GameEngine.cpp.s
 .PHONY : GameEngine.cpp.s
 
@@ -312,6 +328,7 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... GameEngine"
 	@echo "... projekt_asteroid"
 	@echo "... Asteroid.o"
 	@echo "... Asteroid.i"

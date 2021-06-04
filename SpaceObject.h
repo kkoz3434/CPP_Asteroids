@@ -34,14 +34,6 @@ public:
 
     bool collides(SpaceObject object);
     bool beyondMap();
-
-
-
-
-
-
-
 };
-
 
 #endif //PROJEKT_ASTEROID_SPACEOBJECT_H

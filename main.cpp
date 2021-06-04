@@ -12,7 +12,6 @@ using namespace sf;
 
 const float degreeRadian = M_PI / 180;
 
-
 int main() {
     //GameEngine gameEngine;
     //gameEngine.game();

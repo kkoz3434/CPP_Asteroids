@@ -22,6 +22,6 @@ Asteroid::Asteroid(SpaceObject randObj, int lvl, Color color) {
     shape.setOutlineThickness( 3);
     shape.setOutlineColor(color);
     shape.setOrigin(radius, radius);
-    shape.setFillColor(Color(0,0,0));
+    shape.setFillColor(Color(0,0,0, 0));
 }
 

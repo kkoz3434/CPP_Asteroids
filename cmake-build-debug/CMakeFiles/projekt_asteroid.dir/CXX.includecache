@@ -6,27 +6,17 @@
 
 #IncludeRegexTransform: 
 
-/media/kkoz34/Dysk lokalny/4 semestr/cpp laby/projekt_asteroid/GameSetup.h
+/media/kkoz34/Dysk lokalny/4 semestr/cpp laby/projekt_asteroid/Asteroid.cpp
+Asteroid.h
+/media/kkoz34/Dysk lokalny/4 semestr/cpp laby/projekt_asteroid/Asteroid.h
 
-/media/kkoz34/Dysk lokalny/4 semestr/cpp laby/projekt_asteroid/Player.cpp
-Player.h
-/media/kkoz34/Dysk lokalny/4 semestr/cpp laby/projekt_asteroid/Player.h
-
-/media/kkoz34/Dysk lokalny/4 semestr/cpp laby/projekt_asteroid/Player.h
-SFML/Graphics.hpp
--
-time.h
--
-list
--
-iostream
--
-valarray
--
-GameSetup.h
-/media/kkoz34/Dysk lokalny/4 semestr/cpp laby/projekt_asteroid/GameSetup.h
+/media/kkoz34/Dysk lokalny/4 semestr/cpp laby/projekt_asteroid/Asteroid.h
 SpaceObject.h
 /media/kkoz34/Dysk lokalny/4 semestr/cpp laby/projekt_asteroid/SpaceObject.h
+SFML/Graphics.hpp
+-
+
+/media/kkoz34/Dysk lokalny/4 semestr/cpp laby/projekt_asteroid/GameSetup.h
 
 /media/kkoz34/Dysk lokalny/4 semestr/cpp laby/projekt_asteroid/SpaceObject.h
 SFML/Graphics.hpp
