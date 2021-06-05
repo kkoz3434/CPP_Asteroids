@@ -7,7 +7,7 @@
 void Menu::startMenu() {
     RenderWindow window(VideoMode(WIDTH, HEIGHT), TITLE);
     window.setVerticalSyncEnabled("controlled by application");
-    window.setFramerateLimit(1000);
+    window.setFramerateLimit(60);
 
     textInit();
     spawnBackground();

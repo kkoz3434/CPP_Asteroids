@@ -26,6 +26,7 @@ int GameEngine::game(RenderWindow &window) {
         if (asteroids.size() < ASTEROIDS_N || player.score > gameLevel*20000) {
             spawnAsteroid();
             player.health+=20;
+            xBombs+=1;
         }
 
 
@@ -200,5 +201,3 @@ void GameEngine::newXBomb() {
     }
 
 }
-
-
