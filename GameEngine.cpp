@@ -25,7 +25,6 @@ int GameEngine::game(RenderWindow &window) {
 
         if (asteroids.size() < ASTEROIDS_N || player.score > gameLevel*20000) {
             spawnAsteroid();
-            player.health+=20;
             xBombs+=1;
         }
 
@@ -37,7 +36,7 @@ int GameEngine::game(RenderWindow &window) {
         playerCollision();
         scoreText.setString("LEVEL: "+ std::to_string(gameLevel)+ "\n"+std::to_string(player.score) + "\n" + (std::to_string(player.health)) +
                             "/" + std::to_string(PLAYER_HP) + "\n X Bombs: " + std::to_string(xBombs));
-        scoreText.setCharacterSize(36);
+        scoreText.setCharacterSize(48);
         window.draw(scoreText);
         window.display();
     }
@@ -45,8 +44,10 @@ int GameEngine::game(RenderWindow &window) {
 }
 
 void GameEngine::eventHandler(RenderWindow &renderWindow, const Event &event) {
-    if (event.type == Event::Closed)
+    if (event.type == Event::Closed) {
         renderWindow.close();
+        exit(0);
+    }
 
     if (event.type == Event::KeyReleased) {
         if (event.key.code == Keyboard::Space) {
@@ -161,6 +162,7 @@ int GameEngine::bulletCollision() {
                 --asteroid;
                 --bullet;
                 counter++;
+                player.health+=1;
             }
         }
     }

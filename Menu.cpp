@@ -17,8 +17,10 @@ void Menu::startMenu() {
         window.clear();
         Event event;
         while (window.pollEvent(event)) {
-            if (event.type == Event::Closed)
+            if (event.type == Event::Closed) {
                 window.close();
+                exit(0);
+            }
 
 
 
@@ -40,6 +42,7 @@ void Menu::startMenu() {
         window.display();
 
     }
+    exit(0);
 }
 
 void Menu::textEnd() {
@@ -62,6 +65,7 @@ void Menu::endScreen(RenderWindow &window) {
         while (window.pollEvent(event)) {
             if (event.type == Event::Closed) {
                 window.close();
+                exit(0);
             }
             if(event.type == Event::KeyReleased){
                 if (event.key.code == Keyboard::LControl) {
