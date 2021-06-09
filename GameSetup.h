@@ -23,8 +23,8 @@
 #define NEW_ASTEROIDS 3
 #define PLAYER_HP 100
 #define MENU_ASTEROIDS 10
-#define XBOMBS 5
-#define XBOMB_RANGE 20
+#define XBOMBS 1000
+#define XBOMB_RANGE 10
 #define TITLE "Asteroids_kkoz3434"
 
 

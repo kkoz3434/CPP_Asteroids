@@ -13,7 +13,7 @@
 
 int GameEngine::game(RenderWindow &window) {
     std::srand(time(NULL));
-    game_init();
+    gameInit();
     spawnAsteroid();
     while (window.isOpen() && player.health > 0) {
         window.clear();
@@ -23,7 +23,7 @@ int GameEngine::game(RenderWindow &window) {
             eventHandler(window, event);
         }
 
-        if (asteroids.size() < ASTEROIDS_N || player.score > gameLevel*20000) {
+        if (asteroids.size() < ASTEROIDS_N || player.score > gameLevel*40000) {
             spawnAsteroid();
             xBombs+=1;
         }
@@ -66,7 +66,7 @@ void GameEngine::eventHandler(RenderWindow &renderWindow, const Event &event) {
 void GameEngine::moveAsteroids(RenderWindow &renderWindow) {
     for (auto &asteroid : asteroids) {
         asteroid.update();
-        asteroid.wrap_position();
+        asteroid.wrapPosition();
         renderWindow.draw(asteroid.shape);
 
     }
@@ -101,14 +101,14 @@ void GameEngine::movePlayer(RenderWindow &window) {
     }
 
     player.playerUpdate();
-    player.wrap_position();
+    player.wrapPosition();
     window.draw(player.shape);
 
 }
 
-void GameEngine::game_init() {
+void GameEngine::gameInit() {
     player = Player();
-    player.player_init();
+    player.playerInit();
     gameLevel = 0;
 
     if (!font.loadFromFile("../Resources/AmaticSC-Regular.ttf")) {

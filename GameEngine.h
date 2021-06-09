@@ -29,7 +29,7 @@ public:
 
 
 
-    void game_init();
+    void gameInit();
 
     int game(RenderWindow &window);
 

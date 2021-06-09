@@ -124,7 +124,7 @@ void Menu::spawnBackground() {
 void Menu::background(RenderWindow &window) {
     for (auto &asteroid : asteroids) {
         asteroid.update();
-        asteroid.wrap_position();
+        asteroid.wrapPosition();
         window.draw(asteroid.shape);
     }
 }

@@ -28,9 +28,8 @@ public:
 
     SpaceObject();
     SpaceObject(float x, float y, float radius);
-    void set_all(float new_x, float new_y, float new_radius);
     void update();
-    void wrap_position();
+    void wrapPosition();
 
     bool collides(SpaceObject object);
     bool beyondMap();

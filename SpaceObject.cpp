@@ -8,11 +8,7 @@
 
 SpaceObject::SpaceObject(){}
 
-void SpaceObject::set_all(float new_x, float new_y, float new_radius) {
-    x = new_x;
-    y = new_y;
-    radius = new_radius;
-}
+
 
 SpaceObject::SpaceObject(float x, float y, float radius) : x(x), y(y), radius(radius) {
     shape = CircleShape(radius);
@@ -25,7 +21,7 @@ void SpaceObject::update() {
     shape.setPosition(x,y);
 }
 
-void SpaceObject::wrap_position() {
+void SpaceObject::wrapPosition() {
     if(x<0) x = WIDTH;
     if(x>WIDTH) x = 0;
     if(y<0) y=HEIGHT;

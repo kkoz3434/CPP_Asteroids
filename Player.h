@@ -19,7 +19,7 @@ public:
     int health;
 
     Player();
-    void player_init();
+    void playerInit();
     void playerUpdate();
 };
 #endif //PROJEKT_ASTEROID_PLAYER_H

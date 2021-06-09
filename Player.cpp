@@ -12,7 +12,7 @@ Player::Player() {
     health = PLAYER_HP;
 }
 
-void Player::player_init(){
+void Player::playerInit(){
     shape = sf::CircleShape(PLAYER_RADIUS, 3);
     shape.setFillColor(sf::Color(0,0,0));
     shape.setOutlineThickness(3);
